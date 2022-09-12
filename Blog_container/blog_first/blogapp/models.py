@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Person(models.Model):
@@ -21,5 +22,27 @@ class Pizza(models.Model):
 class Topping(models.Model):
     toppingName=models.CharField(max_length=30)
     pizzaTopping=models.ManyToManyField(Pizza)
+
+class Student(models.Model):
+    name=models.CharField(max_length=30)
+    username=models.CharField(max_length=30)
+    sem=models.CharField(max_length=30)
+
+class Committee(models.Model):
+    committeeName=models.CharField(max_length=30)
+    student=models.ManyToManyField(Student,through='Subscription')
+
+class Subscription(models.Model):
+    studentId=models.ForeignKey(Student,on_delete=models.CASCADE)
+    committeId=models.ForeignKey(Committee,on_delete=models.CASCADE)
+    subscriptionDate=models.DateTimeField(auto_now_add=True)
+
+class Album(models.Model):
+    artist=models.ForeignKey(User,on_delete=models.CASCADE)
+    name=models.CharField(max_length=100)
+    release_date=models.DateField(auto_now=True)
+    num_stars=models.IntegerField()
+
+
 
     
