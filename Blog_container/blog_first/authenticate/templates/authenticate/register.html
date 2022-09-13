@@ -1,0 +1,9 @@
+<!-- <div>
+    {{ form.as_p }}
+</div>
+<a href="#">submit</a> -->
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Submit</button>
+</form>

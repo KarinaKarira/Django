@@ -41,7 +41,7 @@
                 <td>{{product.size}}</td>
                 <td>{{product.price}}</td>
                 <td><a href="" class="btn btn-secondary">Add to cart</a></td>
-                <td>{{product.cname}}</td>
+                <td>{{product.category.name}}</td>
                 <td><a href="{% url 'edit' pk=product.id %}" class="btn btn-secondary">Edit</a></td>
                 <td><a href="{% url 'delete' pk=product.id %}" class="btn btn-secondary">Delete</a></td>
             </tr>

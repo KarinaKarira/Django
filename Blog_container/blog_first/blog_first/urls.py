@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/',include('blogapp.urls')),
     # path('test/',include('blogapp.urls'))
+    path('authenticate/',include('authenticate.urls'))
 ]

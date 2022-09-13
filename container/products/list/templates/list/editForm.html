@@ -11,8 +11,6 @@
     <title>Update Products page</title>
 </head>
 <body>
-    
-    {{keyproduct}}
     <div class="row justify-content-center text-center m-5 bg-secondary text-light"  style="border:2px solid rgb(37, 33, 33);font-family: 'Tiro Devanagari Hindi'">
         <legend>Product Details</legend>
         <div class="col-md-4">
@@ -37,9 +35,9 @@
                     <!-- <input type="text" id="category" placeholder="Enter its category" name="productCategory" class="form-control"> -->
                     <select name="productCategory" id="" class="form-control">
                         <!-- here we won't keep the selected option as disabled because if we do so then we wont be able to select the already selected category (since being disabled) and Null would be passed in the backend. -->
-                        <option value="{{keyproduct.cId}}" selected hidden>{{keyCategoryName}}</option>
+                        <option value="{{keyproduct.category.id}}" selected hidden>{{keyproduct.category.name}}</option>
                         {% for category in keycategories %}
-                        <option value="{{category.cId}}">{{category.cName}}</option>
+                        <option value="{{category.id}}">{{category.name}}</option>
                         {% endfor %}
                     </select>
                     <input type="text"hidden name="id" value="{{keyproduct.id}}">
