@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.db import connection
 from .models import Blog
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -35,16 +36,21 @@ def home(request):
 def create(request):
     return render(request,'blogapp/form.html')
 
+@login_required
+def profile(request):
+    return render(request,'blogapp/profile.html')
+
 def insert(request):
     title = request.POST['blogTitle']
     content = request.POST['content']
+    file = request.FILES['imageFile']
 
     # cursor = connection.cursor(cursor=cursors.DictCursor)
     # cursor.execute("INSERT INTO posts (`title`,`content`) VALUES ( %s, %s );", (title, content))
     # cursor = connection.cursor()
     # cursor.execute("SELECT * from posts where softdelete = 0")
 
-    blog=Blog(title=title,content=content)
+    blog=Blog(title=title,content=content,file=file)
     blog.save()
     return redirect('/blog/home')
 
@@ -89,3 +95,10 @@ def delete(request,pk):
     blog.softDelete=1
     blog.save()
     return redirect('/blog/home')
+
+def showBlogs(request):
+    blogs=Blog.objects.filter(softDelete=0)
+    context={
+        'keyBlogs':blogs
+    }
+    return render(request,'blogapp/showBlogs.html',context)

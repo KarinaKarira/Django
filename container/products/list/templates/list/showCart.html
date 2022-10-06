@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width={device-width}, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arima&family=Comfortaa:wght@300;400&family=Finlandica:ital,wght@1,500;1,600&family=Oswald:wght@200;500&family=Roboto+Mono:ital,wght@1,100&family=Splash&family=Tiro+Devanagari+Hindi:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arima&family=Comfortaa:wght@300;400&family=Finlandica:ital,wght@1,500;1,600&family=Oswald:wght@200;500&family=Roboto+Mono:ital,wght@1,100&family=Splash&family=Tiro+Devanagari+Hindi:ital@1&display=swap" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+    <title>viewCart page</title>
+    <style>
+        th,td{
+            border:1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <nav class="fixed-top mb-5">
+        <div class="navbar navbar-expand-md bg-dark jus">
+            <a href=""><i class="fas fa-shopping-cart fa-2x my-2 mx-2 text-warning"></i></a>
+            <div class="navbar-collapse collapse justify-content-between">
+            </div>
+            <form>
+                <!-- <div class="input-group">
+                    <button class="btn btn-outline-warning"><i class="fa fa-search"></i></button>
+                </div> -->
+            </form>
+            <a href="" class="btn btn-warning"><i class="fas fa-user me-2"></i>{{user.username}}</a>
+            <a href="{% url 'logout' %}" class="btn btn-warning mx-3">Logout</a>
+        </div>
+    </nav>
+
+    <!-- {{keyproducts}} -->
+    <div class="row justify-content-center m-5 text-center" style="font-size:large;font-family: 'Tiro Devanagari Hindi', serif;">
+        <div class="col-md-5" style="margin-top: 100px;">
+        {% if keyproducts %}
+        <h4 style="font-weight: bold;">Products bought</h4>
+        <!-- {{keyproducts}} -->
+        <table> 
+            <tr class="bg-dark text-light">
+                <th>Name</th>
+                <th>Details</th>
+                <th>Category</th>
+                <th>Delete</th>
+            </tr>
+            {% for product in keyproducts %}
+            <tr class="bg-light text-dark">
+                <td class="p-3 text-center">{{product.name}}</td>
+                <td class="p-3 text-center"><a href="{% url 'viewProductDetails' productId=product.id %}" class="btn btn-warning">view Details</a></td>
+                <td class="p-3 text-center">{{product.category.name}}</td>
+                <td class="p-3 text-center"><a href="{% url 'deleteFromCart' userId=user.id productId=product.id %}" class="btn btn-warning">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h2>Oops,cart is empty!</h2>
+        <a href="{% url 'categories' %}" class="btn btn-warning">Please add some products</a>
+        {% endif %}
+        </div>
+    </div>
+</body>
+</html>

@@ -10,4 +10,6 @@ urlpatterns = [
     path('edit/<pk>',views.edit,name='edit'),
     path('update',views.update,name='update'),
     path('delete/<pk>',views.delete,name='delete'),
+    path('profile/',views.profile,name='profile'),
+    path('viewBlogs/',views.showBlogs,name='viewBlogs')
 ]

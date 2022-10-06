@@ -1,0 +1,20 @@
+body{
+    background-image: url('./backgroundForLogin.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+}
+form label{
+    font-weight: bolder;
+}
+form input{
+    width:20%;
+    margin: 20px;
+    border-radius: 5px;
+}

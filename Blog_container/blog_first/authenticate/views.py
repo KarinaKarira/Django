@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
@@ -10,10 +10,12 @@ def register(request):
         }
         if (form.is_valid()):
             form.save()
-        # return redirect('home')
+            return redirect('login')
     else:
         form=UserCreationForm()
         context={
             'form':form
         }
     return render(request,'authenticate/register.html',context)
+def profile(request):
+    print('hello empty')

@@ -13,7 +13,7 @@
 <!-- <QuerySet [<Category: Category object (1)>, <Category: Category object (2)>, <Category: Category object (3)>, <Category: Category object (4)>]> -->
 <body>
     
-    <div class="row justify-content-center text-center m-5 bg-secondary text-light"  style="border:2px solid rgb(37, 33, 33);font-family: 'Tiro Devanagari Hindi'">
+    <div class="row justify-content-center text-center m-5 bg-light text-dark"  style="border:2px solid rgb(37, 33, 33);font-family: 'Tiro Devanagari Hindi'">
         <legend>Product Details</legend>
         <!-- {{keycategories}} --> 
         <!-- keycategories is a QuerySet Object -->
@@ -38,7 +38,7 @@
                     <label for="category" class="my-2">Category</label>
                     <!-- <input type="text" id="category" placeholder="Enter its category" name="productCategory" class="form-control"> -->
                     <select name="productCategory" id="" class="form-control">
-                        <option value="none"selected hidden disabled>Select an option</option>
+                        <option value="none"selected hidden disabled>{{keySelectedCat.name}}</option>
                         {% for category in keycategories %}
                         <option value="{{category.id}}">{{category.name}}</option>
                         {% endfor %}

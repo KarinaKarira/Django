@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'blogapp/main.css'%}">
+    <link rel="stylesheet" href="{% static 'blogapp/main.css' %}">
     <title>Document</title>
 </head>
 <body>
@@ -20,17 +22,27 @@
                 </a>
             <button class="navbar-toggler bg-light mx-3" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
             <div class=" collapse navbar-collapse row" id="nav">
-                <ul class="navbar-nav col-md-8">
-                    <li><a class="nav-link " href="">Home</a></li>
-                    <li><a class="nav-link" href="">About</a></li>
-                    <li><a class="nav-link" href="">Contact</a></li>
+                <ul class="navbar-nav col-md-10">
+                    <li><a class="nav-link mx-2" href="">Home</a></li>
+                    <li><a class="nav-link mx-2" href="">About</a></li>
+                    <li><a class="nav-link mx-2" href="">Contact</a></li>
                 </ul>
-                <ul class="navbar-nav col-md-4">
-                    <li><a class="nav-link" href="#">Login</a></li>
-              <li>
-                <a class="nav-link" href="#">Register</a>
-              </li>
-
+                <ul class="navbar-nav col-md-2">
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a class="nav-link mx-4" href="{% url 'logout' %}">logout</a>
+                    </li>
+                    <li>
+                        <a class="nav-link mx-4" href="{% url 'profile' %}">View profile</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a class="nav-link mx-2" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li>
+                        <a class="nav-link mx-2" href="{% url 'register' %}">Register</a>
+                    </li>
+                    {% endif %}
                 </ul>
     
             </div>
@@ -38,32 +50,21 @@
         </div>
     </nav>
 
-    <div class="row justify-content-end">
+    <!-- <div class="row justify-content-end">
         <div class="col-2">
             <a href="{% url 'create' %}" class="btn btn-warning">Create Post</a>
         </div>
-    </div>
-    <div class="row justify-content-center my-3">
-        <div class="col-10">
-            <!-- {{keyposts}} -->
-            {% for post in keyposts %}
-            <div class="card">
-                <div class="card-header">
-                    <div class="row justify-content-center">
-                        <div class="col-10">
-                            {{post.title}}
-                        </div>
-                        <div class="col-2">
-                            <a href="{% url 'edit' pk=post.id %}" class="btn btn-warning mx-2">Edit</a>
-                            <a href="{% url 'delete' pk=post.id %}" class="btn btn-warning mx-2">Delete</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">{{post.content}}</post></div>
-            </div>
-            {% endfor %}
+    </div> -->
+    <div class="row justify-content-center my-5">
+        <div class="col-2 m-5">
+            <!-- <a href="{% url 'create' %}" class="btn btn-warning">Create Post</a> -->
+                <a href="{% url 'create' %}"><img src="{% static 'blogapp/GitHub3.png' %}" alt="" width="80%" height="80%"></a>
+                <p>Create posts</p>
         </div>
-        
+        <div class="col-2 m-5">
+            <a href="{% url 'viewBlogs' %}"><img src="{% static 'blogapp/GitHub3.png' %}" alt="" width="80%" height="80%"></a>
+            <p>View Posts</p>
+        </div>
     </div>
 </body>
 </html>

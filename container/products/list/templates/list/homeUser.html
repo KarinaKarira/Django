@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+ 
+    <!-- bootstrap cdn -->
+    <link href="https://fonts.googleapis.com/css2?family=Arima&family=Comfortaa:wght@300;400&family=Finlandica:ital,wght@1,500;1,600&family=Oswald:wght@200;500&family=Roboto+Mono:ital,wght@1,100&family=Splash&family=Tiro+Devanagari+Hindi:ital@1&display=swap" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+    <nav class="fixed-top">
+        <div class="navbar navbar-expand-md bg-dark">
+            <a href=""><i class="fas fa-shopping-cart fa-2x my-2 mx-2 text-warning"></i></a>
+            <!-- <p class="m-2" style="font-family:'Tiro Devanagari Hindi';font-size:large">AllTime Shopping Mart</p> -->
+            <div class="navbar-collapse collapse justify-content-space-around">
+                <ul class="navbar-nav" style="font-family:'Tiro Devanagari Hindi'">
+                    <li><a href="{% url 'categories' %}" class="text-light nav-link mx-3">Categories</a></li>
+                    <li><a href="{% url 'viewCart' userId=user.id %}" class="text-light nav-link mx-3">Cart</a></li>
+                    <li><a href="{% url 'viewOffer' %}" class="text-light nav-link mx-3">Offers</a></li>
+                </ul>
+                <form class="mx-3" style="width:300px">
+                    <div class="input-group">
+                        <button class="btn btn-outline-warning"><i class="fa fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
+            <a href="" class="btn btn-warning"><i class="fas fa-user me-2"></i>{{user.username}}</a>
+            <a href="{% url 'logout' %}" class="btn btn-warning mx-3">logout</a>
+        </div>
+    </nav>
+    <section>
+        <div class="row justify-content-center text-center align-items-center bg-light text-dark" style="height:100vh">
+            <div class="col-md-10" style="font-family:'Tiro Devanagari Hindi';font-weight: bolder;font-size: larger">
+                {% if user.is_authenticated %}
+                    <p>Hello {{user.username}}</p>
+                    <p>Welcome to our mart!</p>
+                {% else %}
+                    <p>Invalid user</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+</body>
+</html>

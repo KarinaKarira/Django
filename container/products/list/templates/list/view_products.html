@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Arima&family=Comfortaa:wght@300;400&family=Finlandica:ital,wght@1,500;1,600&family=Oswald:wght@200;500&family=Roboto+Mono:ital,wght@1,100&family=Splash&family=Tiro+Devanagari+Hindi:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arima&family=Comfortaa:wght@300;400&family=Finlandica:ital,wght@1,500;1,600&family=Oswald:wght@200;500&family=Roboto+Mono:ital,wght@1,100&family=Splash&family=Tiro+Devanagari+Hindi:ital@1&display=swap" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
     <title>View_products page</title>
     <style>
         th,td{
@@ -16,34 +18,64 @@
     </style>
 </head>
 <body>
+    <nav class="fixed-top mb-5">
+        <div class="navbar navbar-expand-md bg-dark jus">
+            <a href=""><i class="fas fa-shopping-cart fa-2x my-2 mx-2 text-warning"></i></a>
+            <div class="navbar-collapse collapse justify-content-between">
+                {% if user.is_superuser %}
+                <ul class="navbar-nav text-light mx-3" style="font-family:'Tiro Devanagari Hindi'">
+                    <li>
+                        <a href="{% url 'addProduct' selectedCatId=keySelectedCat.id %}" class="btn btn-warning">Add Product</a>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+            <!-- <form>
+                <div class="input-group">
+                    <button class="btn btn-outline-warning"><i class="fa fa-search"></i></button>
+                </div>
+            </form> -->
+            <a href="" class="btn btn-warning"><i class="fas fa-user me-2"></i>{{user.username}}</a>
+            <a href="{% url 'logout' %}" class="btn btn-warning mx-3">Logout</a>
+        </div>
+    </nav>
+
     <!-- {{keyproducts}} -->
     <div class="row justify-content-center m-5 text-center" style="font-size:large;font-family: 'Tiro Devanagari Hindi', serif;">
-        <div class="col-md-12">
+        <div class="col-md-6" style="margin-top: 100px;">
         <h4 style="font-weight: bold;">Products' Information</h4>
         <!-- {{keyproducts}} -->
         <table> 
-            <tr class="bg-secondary text-light">
+            <tr class="bg-dark text-light">
                 <th>Name</th>
-                <th>Summary</th>
+                <!-- <th>Summary</th>
                 <th>Color</th>
                 <th>Size</th>
-                <th>Price</th>
+                <th>Price</th>-->
+                <th>Details</th>
                 <th>Buy</th>
-                <th>Category</th>
+            
+                {% if user.is_superuser %}
                 <th>Update</th>
                 <th>Delete</th>
+                {% endif %}
             </tr>
             {% for product in keyproducts %}
-            <tr style="background-color:#fad6b1">
-                <td>{{product.name}}</td>
-                <td>{{product.summary}}</td>
+            <tr class="bg-light text-dark">
+                <td class="p-3 text-center">{{product.name}}</td>
+                <!-- <td>{{product.summary}}</td>
                 <td>{{product.color}}</td>
                 <td>{{product.size}}</td>
-                <td>{{product.price}}</td>
-                <td><a href="" class="btn btn-secondary">Add to cart</a></td>
-                <td>{{product.category.name}}</td>
-                <td><a href="{% url 'edit' pk=product.id %}" class="btn btn-secondary">Edit</a></td>
-                <td><a href="{% url 'delete' pk=product.id %}" class="btn btn-secondary">Delete</a></td>
+                <td>{{product.price}}</td> -->
+                <td class="p-3 text-center"><a href="{% url 'viewProductDetails' productId=product.id %}" class="btn btn-warning" style="width:max-content;">View Details</a></td>
+                <td class="p-3 text-center"><a href="{% url 'addToCart' productId=product.id userId=user.id %}" class="btn btn-outline-warning text-dark" style="width:max-content;">Add to cart</a></td>
+                <!-- <td class="p-3 text-center">{{product.category.name}}</td> -->
+
+                {% if user.is_superuser %}
+                <td class="p-3 text-center"><a href="{% url 'edit' pk=product.id %}" class="btn btn-outline-warning text-dark" style="width:max-content;">Edit</a></td>
+                <td class="p-3 text-center"><a href="{% url 'delete' pk=product.id %}" class="btn btn-outline-warning text-dark" style="width:max-content;">Delete</a></td>
+                {% endif %}
+
             </tr>
             {% endfor %}
         </table>
