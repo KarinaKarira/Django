@@ -24,6 +24,9 @@
             <div class="navbar-collapse collapse" style="position:relative">
                 <a href=""><i class="fas fa-shopping-cart fa-2x my-2 mx-2 text-warning"></i></a>
                 <p class="m-2 text-light" style="font-family:'Tiro Devanagari Hindi';font-size:large" style="position:absolute;left:30px">AllTime Shopping Mart</p>
+                {% if user.is_superuser %}
+                <a href="{% url 'addCat' %}" class="btn btn-warning">Add category</a>
+                {% endif %}
             </div>
             <!-- <div class="navbar-collapse collapse justify-content-space-around">
                  <ul class="navbar-nav" style="font-family:'Tiro Devanagari Hindi'">
@@ -47,14 +50,14 @@
                 {% for category in keyCategories %}
                 <div class="col-md-10 m-3" style="width:50%;height:50%">
                     <div class="card">
-                        {% if category.file %}
+                        <!-- {% if category.file %} -->
                         <a href="{% url 'show' selectedCat=category.id %}">
                             <!-- <img src="{% static 'media/uploads/category.file' %}" alt="" class="card-img-top"> -->
-                            <img src="{{post.file.url}}" alt="" class="card-img-top">
+                            <img src="{{category.file.url}}" alt="" class="card-img-top">
                         </a>
-                        {% else %}
+                        <!-- {% else %}
                         <a href="{% url 'show' selectedCat=category.id %}"><img src="{% static 'list/ECommerceSite.jpg' %}" alt="" class="card-img-top"></a>
-                        {% endif %}
+                        {% endif %} -->
                         <div class="card_body">
                             <h2 class="card-title " style="font-family:'Tiro Devanagari Hindi'">{{category.name}}</h2>
                             <p class="card-subtitle" style="font-family:'Tiro Devanagari Hindi'">Lorem ipsum dolor sit amet.</p>

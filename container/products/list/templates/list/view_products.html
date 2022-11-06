@@ -40,7 +40,7 @@
         </div>
     </nav>
 
-    <!-- {{keyproducts}} -->
+    {% if keyproducts %}
     <div class="row justify-content-center m-5 text-center" style="font-size:large;font-family: 'Tiro Devanagari Hindi', serif;">
         <div class="col-md-6" style="margin-top: 100px;">
         <h4 style="font-weight: bold;">Products' Information</h4>
@@ -81,5 +81,11 @@
         </table>
         </div>
     </div>
+    {% else %}
+    <p class="text-center" style="margin-top: 30%;font-weight: bold;font-family:'Tiro Devanagari Hindi' ;">Oops!No products for this category!</p>
+        {% if user.is_superuser %}
+        <p class="text-center" style="margin-top: 5%;font-weight: bold;font-family:'Tiro Devanagari Hindi' ;">Add some product to get the same</p>
+        {% endif %}
+    {% endif %}
 </body>
 </html>

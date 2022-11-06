@@ -21,6 +21,8 @@ urlpatterns = [
     path('viewCart/<userId>',views.showCart,name='viewCart'),
     path('viewProductDetails/<productId>',views.viewProductDetails,name='viewProductDetails'),
     path('viewOffer',views.showOffers,name='viewOffer'),
-    path('deleteFromCart/<userId>/<productId>',views.deleteFromCart,name='deleteFromCart',)
+    path('deleteFromCart/<userId>/<productId>',views.deleteFromCart,name='deleteFromCart',),
+    path('addCategory/',views.addCat,name='addCat'),
+    path('addCatData',views.addCatData,name="addCatData")
 ]
 

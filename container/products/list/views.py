@@ -182,6 +182,17 @@ def deleteFromCart(request,userId,productId):
     print(productToDelete[0].id)
     productToDelete.delete()
     return redirect('homeUser')
+@login_required
+def addCat(request):
+    return render(request,'list/addCategoryPage.html')
+
+def addCatData(request):
+    name=request.POST['catName']
+    file=request.FILES.get('catImage')
+    c=Category(name=name,file=file)
+    c.save()
+    # print("hi",file,c)
+    return redirect('homeUser')
 #categories
 # [{'id': 1, 'name': 'Electronics'}, {'id': 2, 'name': 'Food'}, {'id': 3, 'name': 'BeautyProducts'}, {'id': 4, 'name': 'Clothes'}, {'id': 5, 'name': 'HomeAppliances'}, {'id': 6, 'name': 'Toys'}, {'id': 7, 'name': 'Accesories'}]
 #context
